@@ -1,0 +1,120 @@
+<html>
+<head>
+<title id="title">Game Testing</title>
+</head>
+<body>
+<button id="reset" onclick="reset()">Reset</button>
+<br>
+<button id="br" onclick="br()">Blue and Red</button>
+<button id="gb" onclick="gb()">Green and Black</button>
+<br>
+<button onclick="slow()">Slow Speed</button>
+<button onclick="medium()">Medium Speed</button>
+<button onclick="fast()">Fast Speed</button>
+<input type="text" id="inputs">
+<button onclick="setValue()">Dont please</button>
+<br>
+<button onclick="dots()">Three Dots</button>
+<button onclick="why()">Single Dots</button>
+<br>
+<button onclick="noclear()">No Clear</button>
+<button>Reload Whole Page To Fix</button>
+<h5><a href="indexy.html">Home</a></h5>
+<canvas id="myCanvas" width="480" height="320"></canvas>
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+let x = canvas.width/2;
+let y = canvas.height - 30;
+let dx = 2;
+let dy = -2;
+var ballRadius = 10;
+ctx.fillStyle = "blue";
+x = 280;
+y = 280;
+var colorhitside = "red";
+var colorhittops = "blue";
+var ballspeed = 1;
+var clear = true;
+function reset()
+{
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  x = 200;
+  y = 200;
+  dx = dx;
+  dy = dy;
+}
+function br()
+{
+  colorhitside = "red";
+  colorhittops = "blue";
+}
+function gb()
+{
+  colorhitside = "green";
+  colorhittops = "black";
+}
+function slow()
+{
+  ballspeed = 1;
+}
+function medium()
+{
+  ballspeed = 1.75;
+}
+function fast()
+{
+  ballspeed = 2.5;
+}
+function dots()
+{
+  ballspeed = 8;
+}
+function why()
+{
+  ballspeed = 20;
+}
+function setValue()
+{
+  ballspeed = inputs.value;
+}
+function drawBall()
+{
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+  ctx.fill();
+  ctx.closePath();
+}
+function noclear()
+{
+  clear = false;
+}
+function clear()
+{
+  clear = true;
+}
+function draw()
+{
+  if (clear == true)
+  {
+    ctx.clearRect(12, 12, 455, 295);
+  }
+  drawBall();
+  x += dx * ballspeed;
+  y += dy * ballspeed;
+  if (x + dx > canvas.width || x + dx < 0)
+  {
+    dx = -dx;
+    ctx.fillStyle = colorhitside;
+  }
+  if (y + dy > canvas.height || y + dy < 0)
+  {
+    dy = -dy;
+    ctx.fillStyle = colorhittops;
+  }
+}
+setInterval(draw, 10);
+</script>
+
+</body>
+</html>
